@@ -317,6 +317,62 @@ true
 gap> IsomorphismDigraphs(EmptyDigraph(1), gr1);
 fail
 
+#  IsomorphismDigraphs: for MultiDigraphs, 1
+gap> gr1 := Digraph([[3, 1, 3], [1, 3], [2, 2, 1]]);
+<multidigraph with 3 vertices, 8 edges>
+gap> gr4 := Digraph([[2, 3, 3], [2, 1, 1], [1, 2]]);
+<multidigraph with 3 vertices, 8 edges>
+gap> iso := IsomorphismDigraphs(gr1, gr4);
+[ (1,2,3), (1,5,7,3,6,2,4,8) ]
+gap> OnMultiDigraphs(gr1, iso) = gr4;
+true
+gap> iso := IsomorphismDigraphs(gr4, gr1);
+[ (1,3,2), (1,8,4,2,6,3,7,5) ]
+gap> OnMultiDigraphs(gr4, iso) = gr1;
+true
+gap> iso := IsomorphismDigraphs(gr1, gr1);
+[ (), () ]
+gap> OnMultiDigraphs(gr1, iso) = gr1;
+true
+
+# IsIsomorphicDigraphs: for coloured digraphs
+# Examples arose from Steve Goldstein's work on
+
+# 256, 9 and 256, 11
+gap> colours256 :=
+> [[1 .. 4096], [4097 .. 4160], [4161 .. 4224], [4225], [4226], [4227], [4228],
+>  [4229], [4230], [4231], [4232], [4233], [4234], [4235], [4236], [4237],
+>  [4238], [4239], [4240], [4241], [4242], [4243], [4244], [4245], [4246],
+>  [4247], [4248], [4249]];;
+
+# 512, 3569773
+gap> colours512 :=
+> [[1 .. 5476], [5477 .. 5550], [5551 .. 5624], [5625], [5626], [5627], [5628],
+>  [5629], [5630], [5631], [5632], [5633], [5634], [5635]];;
+# 512, 3569774
+# 512, 3569809
+# 512, 3569810
+
+# The following two are true:
+
+# 512, 3569773
+# 512, 3569809
+
+# The following two are true:
+
+# 512, 3569774
+# 512, 3569810
+
+# The following two are false:
+
+# 512, 3569773
+# 512, 3569774
+
+# The following two are false:
+
+# 512, 3569809
+# 512, 3569810
+
 #  DIGRAPHS_UnbindVariables
 gap> Unbind(G);
 gap> Unbind(H);
