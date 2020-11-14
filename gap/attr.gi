@@ -2172,7 +2172,7 @@ function(D)
   if HasDigraphHasLoops(D) and not DigraphHasLoops(D) then
     return [];
   fi;
-  return Filtered(DigraphVertices(D), x -> x in OutNeighboursOfVertex(D, x));
+  return Filtered(DigraphVertices(D), x -> IsDigraphEdge(D, x, x));
 end);
 
 InstallMethod(DigraphDegeneracy, "for a digraph", [IsDigraph],
