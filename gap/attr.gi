@@ -158,6 +158,12 @@ function(D)
   return DIGRAPHS_ArticulationPointsBridgesStrongOrientation(D)[2];
 end);
 
+InstallMethod(ArticulationPoints, "for a digraph by out-neighbours",
+[IsDigraphByOutNeighboursRep and IsEmptyDigraph and DigraphHasLoops],
+function(D)
+  return true;
+end);
+
 InstallMethod(Bridges, "for a digraph by out-neighbours",
 [IsDigraphByOutNeighboursRep],
 function(D)
