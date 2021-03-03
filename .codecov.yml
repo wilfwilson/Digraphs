@@ -2,7 +2,6 @@ coverage:
   precision: 2      # Report coverage to 2 decimal places
   round: down       # Round down
   range: "90...100" # Anything below 90% is coloured red (considered bad)
-
   status: # GitHub status checks to add to a PR
     project:
       default:
