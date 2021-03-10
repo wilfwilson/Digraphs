@@ -1061,6 +1061,14 @@ gap> DigraphDiameter(gr);
 3
 gap> DigraphGroup(gr) = DihedralGroup(IsPermGroup, 14);
 true
+gap> gr := DigraphSymmetricClosure(DigraphAddEdge(CycleDigraph(7), 1, 2));;
+gap> IsMultiDigraph(gr);
+true
+gap> SetDigraphGroup(gr, Group((1, 2)(3, 7)(4, 6)));
+gap> DigraphDiameter(gr);
+3
+gap> DigraphUndirectedGirth(gr);
+2
 gap> gr := DigraphSymmetricClosure(CycleDigraph(7));;
 gap> DigraphDiameter(gr);
 3
@@ -2251,6 +2259,8 @@ true
 gap> DigraphReverse(Digraph(IsMutableDigraph, [[2], [1]]))
 > = CompleteDigraph(2);
 true
+gap> OutNeighbours(DigraphReverse(ChainDigraph(IsMutableDigraph, 5)));
+[ [  ], [ 1 ], [ 2 ], [ 3 ], [ 4 ] ]
 
 # DigraphCartesianProductProjections
 gap> D := DigraphCartesianProduct(ChainDigraph(3), CycleDigraph(4),
