@@ -45,6 +45,6 @@ DeclareConstructor("PetersenGraphCons", [IsDigraph]);
 DeclareOperation("PetersenGraph", []);
 DeclareOperation("PetersenGraph", [IsFunction]);
 
-DeclareConstructor("GeneralisedPetersenGraphCons", [IsDigraph, IsInt, IsInt]);
-DeclareOperation("GeneralisedPetersenGraph", [IsInt, IsInt]);
-DeclareOperation("GeneralisedPetersenGraph", [IsFunction, IsInt, IsInt]);
+DeclareConstructor("GeneralisedPetersenGraphCons", [IsDigraph, IsPosInt, IsInt]);
+DeclareOperation("GeneralisedPetersenGraph", [IsPosInt, IsInt]);
+DeclareOperation("GeneralisedPetersenGraph", [IsFunction, IsPosInt, IsInt]);
