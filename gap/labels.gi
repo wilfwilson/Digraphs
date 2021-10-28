@@ -1,24 +1,30 @@
 #############################################################################
 ##
 ##  labels.gi
-##  Copyright (C) 2019                                   James D. Mitchell
+##  Copyright (C) 2019-25                                James D. Mitchell
 ##
 ##  Licensing information can be found in the README file of this package.
 ##
 #############################################################################
 ##
 
+BindGlobal("HaveEdgeLabelsBeenAssigned", D -> IsBound(D!.edgelabels));
+BindGlobal("DIGRAPHS_VertexLabelsInitialised", D -> IsBound(D!.vertexlabels));
+
+BindGlobal("DIGRAPHS_DefaultEdgeLabel", 1);
+
 BindGlobal("DIGRAPHS_InitEdgeLabels",
 function(D)
-  if not IsBound(D!.edgelabels) then
+  if not HaveEdgeLabelsBeenAssigned(D) then
     D!.edgelabels := List(OutNeighbours(D),
-                          x -> ListWithIdenticalEntries(Length(x), 1));
+      x -> ListWithIdenticalEntries(Length(x), DIGRAPHS_DefaultEdgeLabel));
+                          
   fi;
 end);
 
 BindGlobal("DIGRAPHS_InitVertexLabels",
 function(D)
-  if not IsBound(D!.vertexlabels) then
+  if not DIGRAPHS_VertexLabelsInitialised(D) then
     D!.vertexlabels := [1 .. DigraphNrVertices(D)];
   fi;
 end);
@@ -81,14 +87,11 @@ function(D)
   Unbind(D!.vertexlabels);
 end);
 
-InstallMethod(HaveEdgeLabelsBeenAssigned, "for a digraph", [IsDigraph],
-D -> IsBound(D!.edgelabels));
-
 InstallMethod(SetDigraphEdgeLabel,
 "for a digraph, a pos int, a pos int, and an object",
 [IsDigraph, IsPosInt, IsPosInt, IsObject],
 function(D, v, w, label)
-  local p, list;
+  local p;
   if IsMultiDigraph(D) then
     ErrorNoReturn("the 1st argument <D> must be a digraph with no multiple ",
                   "edges, edge labels are not supported on digraphs with ",
@@ -98,13 +101,13 @@ function(D, v, w, label)
   if p = fail then
     ErrorNoReturn("there is no edge from ", v, " to ", w,
                   " in the digraph <D> that is the 1st argument,");
+  elif HaveEdgeLabelsBeenAssigned(D) or label <> DIGRAPHS_DefaultEdgeLabel then 
+    DIGRAPHS_InitEdgeLabels(D);
+    if not IsBound(D!.edgelabels[v]) then
+      D!.edgelabels[v] := ListWithIdenticalEntries(OutDegreeOfVertex(D, v), 1);
+    fi;
+    D!.edgelabels[v][p] := ShallowCopy(label);
   fi;
-  DIGRAPHS_InitEdgeLabels(D);
-  if not IsBound(D!.edgelabels[v]) then
-    list := OutNeighboursOfVertex(D, v);
-    D!.edgelabels[v] := ListWithIdenticalEntries(Length(list), 1);
-  fi;
-  D!.edgelabels[v][p] := ShallowCopy(label);
 end);
 
 InstallMethod(DigraphEdgeLabel, "for a digraph, a pos int, and a pos int",
@@ -120,9 +123,11 @@ function(D, v, w)
   if p = fail then
     ErrorNoReturn("there is no edge from ", v, " to ", w,
                   " in the digraph <D> that is the 1st argument,");
+  elif not HaveEdgeLabelsBeenAssigned(D) then
+    return DIGRAPHS_DefaultEdgeLabel;
+  else
+    return ShallowCopy(D!.edgelabels[v][p]);
   fi;
-  DIGRAPHS_InitEdgeLabels(D);
-  return ShallowCopy(D!.edgelabels[v][p]);
 end);
 
 InstallMethod(DigraphEdgeLabelsNC, "for a digraph", [IsDigraph],
@@ -145,6 +150,8 @@ end);
 # markuspf: this is mainly because we do not support edge labels
 # on multidigraphs and need the SetDigraphEdgeLabels function
 # to fail silently in some places
+# TODO Wilf this doesn't seem like a good idea. Are we duplicating
+# IsMultiDigraph checks?
 InstallMethod(SetDigraphEdgeLabelsNC, "for a digraph and a list",
 [IsDigraph, IsList],
 function(D, labels)
@@ -191,10 +198,11 @@ function(D, f)
 end);
 
 InstallMethod(ClearDigraphEdgeLabels, "for a digraph", [IsDigraph],
-function(D)
-  Unbind(D!.edgelabels);
-end);
+D -> D!.edgelabels);
 
+# Is this safe? Probably yes insofar is at is currently used, but seems
+# dangerous for people who might misunderstand. It is not the same as unbinding
+# a label, it can only be used in conjunction with removing an edge.
 InstallMethod(RemoveDigraphEdgeLabel,
 "for a digraph, positive integer, and positive integer",
 [IsDigraph, IsPosInt, IsPosInt],

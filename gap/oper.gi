@@ -184,8 +184,11 @@ function(D, src, ran)
                   "digraph <D> that is the 1st argument,");
   fi;
   Add(D!.OutNeighbours[src], ran);
+  # TODO if it *is* now a multidigraph, should I clear the edge labels?
+  # TODO what about adding a multi-edge to an edge-labelled digrpah, then
+  # removing it?
   if HaveEdgeLabelsBeenAssigned(D) and not IsMultiDigraph(D) then
-    SetDigraphEdgeLabel(D, src, ran, 1);
+    Add(D!.edgelabels[src], DIGRAPHS_DefaultEdgeLabel);
   fi;
   return D;
 end);
