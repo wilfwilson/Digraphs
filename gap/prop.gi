@@ -214,7 +214,7 @@ end);
 
 InstallImmediateMethod(IsConnectedDigraph,
 IsDigraph and HasDigraphConnectedComponents, 0,
-D -> Length(DigraphConnectedComponents(D).comps) = 1);
+D -> Length(DigraphConnectedComponents(D).comps) < 2);
 
 InstallMethod(IsConnectedDigraph, "for a digraph", [IsDigraph],
 function(D)
@@ -232,10 +232,6 @@ InstallImmediateMethod(IsConnectedDigraph,
 "for a digraph with known number of connected components",
 IsDigraph and HasDigraphNrConnectedComponents, 0,
 D -> DigraphNrConnectedComponents(D) < 2);
-
-InstallImmediateMethod(IsAcyclicDigraph, "for a reflexive digraph",
-IsReflexiveDigraph, 0,
-D -> DigraphNrVertices(D) = 0);
 
 InstallImmediateMethod(IsAcyclicDigraph, "for a strongly connected digraph",
 IsStronglyConnectedDigraph, 0,
