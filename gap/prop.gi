@@ -16,8 +16,22 @@ IS_MULTI_DIGRAPH);
 InstallMethod(DigraphHasNoVertices, "for a digraph", [IsDigraph],
 D -> not DigraphHasAVertex(D));
 
+InstallImmediateMethod(DigraphHasAVertex,
+"for a digraph with known number of vertices",
+IsDigraph and HasDigraphNrVertices,
+D -> DigraphNrVertices(D) > 0);
+
 InstallMethod(DigraphHasAVertex, "for a digraph", [IsDigraph],
 D -> DigraphNrVertices(D) > 0);
+
+InstallImmediateMethod(IsNonemptyDigraph,
+"for a digraph with known number of edges", IsDigraph and HasDigraphNrEdges,
+D -> DigraphNrEdges(D) > 0);
+
+InstallImmediateMethod(DigraphNrEdges,
+"for a digraph with known edges",
+IsDigraph and HasDigraphEdges,
+D -> Length(DigraphEdges(D)));
 
 InstallMethod(IsNonemptyDigraph, "for a digraph", [IsDigraph],
 D -> not IsEmptyDigraph(D));
