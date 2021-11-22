@@ -8,8 +8,8 @@
 #############################################################################
 ##
 
-InstallMethod(DigraphNrVertices, "for a digraph by out-neighbours",
-[IsDigraphByOutNeighboursRep], DIGRAPH_NR_VERTICES);
+InstallImmediateMethod(DigraphNrVertices, "for a digraph by out-neighbours",
+IsDigraphByOutNeighboursRep, DIGRAPH_NR_VERTICES);
 
 InstallGlobalFunction(OutNeighbors, OutNeighbours);
 
