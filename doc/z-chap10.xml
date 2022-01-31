@@ -1,0 +1,32 @@
+<Chapter Label="A table">
+  <Heading>Some heading</Heading>
+
+  First item of text.
+
+  <Table Align="ll">
+    <Row>
+      <Item><B>Column</B></Item>
+      <Item><B>Data</B></Item>
+    </Row>
+    <HorLine/>
+    <Row>
+      <Item>
+        Nonsense
+      </Item>
+      <Item>
+        More nonsense
+      </Item>
+    </Row>
+    <Row>
+      <Item>
+        Nonsense
+      </Item>
+      <Item>
+        More nonsense
+      </Item>
+    </Row>
+  </Table>
+
+  Second item of text.
+
+</Chapter>
