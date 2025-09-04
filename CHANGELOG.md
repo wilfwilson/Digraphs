@@ -4,6 +4,14 @@ Wilf A. Wilson, Michael Young et al.
 
 Licensing information can be found in the `LICENSE` file.
 
+## Version 1.12.1 (released 04/09/2025)
+
+## What's Changed
+* Note a lot really!
+* Wilf has just gone really silly.
+
+**Full Changelog**: <https://github.com/digraphs/Digraphs/compare/v1.12.0...v1.12.1>
+
 ## Version 1.12.0 (released 02/09/2025)
 
 ## What's Changed
