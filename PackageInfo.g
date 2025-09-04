@@ -45,7 +45,7 @@ ArchiveFormats := ".tar.gz",
 
 SourceRepository := rec(
     Type := "git",
-    URL := Concatenation("https://github.com/digraphs/",
+    URL := Concatenation("https://github.com/wilfwilson/",
                          ~.PackageName),
 ),
 

@@ -69,7 +69,8 @@ jobs:
           dry-run: ${{ inputs.dry-run }}
           force: ${{ inputs.force }}
           body-text: ${{ env.BODY }}
-      - uses: gap-actions/update-gh-pages@v1
+
+      - uses: wilfwilson/update-gh-pages@copy-additional-files
         with:
           # The <clean> option stops the action from updating the website with
           # the latest GitHubPagesForGAP code, because we have customised our
