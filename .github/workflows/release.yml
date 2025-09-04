@@ -83,4 +83,4 @@ jobs:
           # done carefully.
           clean: false
           dry-run: ${{ inputs.dry-run }}
-          extra-files: "CHANGELOG.md:CHANGELOG.md"
+          extra-files: "CHANGELOG.md:CHANGELOG.md,tst:new/subdirectories"
