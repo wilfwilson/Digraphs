@@ -38,14 +38,14 @@ fi;
 SetPackageInfo(rec(
 PackageName := "Digraphs",
 Subtitle := "Graphs, digraphs, and multidigraphs in GAP",
-Version := "1.12.0",
-Date := "02/09/2025",  # dd/mm/yyyy format
+Version := "1.12.1",
+Date := "04/09/2025",  # dd/mm/yyyy format
 License := "GPL-3.0-or-later",
 ArchiveFormats := ".tar.gz",
 
 SourceRepository := rec(
     Type := "git",
-    URL := Concatenation("https://github.com/digraphs/",
+    URL := Concatenation("https://github.com/wilfwilson/",
                          ~.PackageName),
 ),
 
