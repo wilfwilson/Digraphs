@@ -35,6 +35,7 @@ if not CompareVersionNumbers(ReplacedString(GAPInfo.Version, "dev", ""), "4.11")
     then
   BindGlobal("INTOBJ_MAX", 1152921504606846975);
   BindGlobal("Last", {x} -> x[Length(x)]);
+  BindGlobal("First", {x} -> x[1]);
 fi;
 
 ReadPackage("digraphs", "gap/utils.gi");
