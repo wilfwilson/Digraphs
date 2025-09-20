@@ -1819,7 +1819,7 @@ function(D, maxLength)
             if DigraphVertexLabel(digraph, v) > key and blocked[v] = 1
               and Length(path) < maxLength then
                 extendedPath := Concatenation(path, [v]);
-                if IsDigraphEdge(digraph, v, First(path)) then
+                if IsDigraphEdge(digraph, v, path[1]) then
                     Add(C, extendedPath);
                 else
                     data := CCExtension(digraph, extendedPath, C, key, blocked);
